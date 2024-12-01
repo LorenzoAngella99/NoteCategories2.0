@@ -27,7 +27,7 @@ class RvContactsAdapter(private  val contactList : java.util.ArrayList<Note>) : 
         holder.apply{
             binding.apply{
                 textTitle.text = currentItem.title
-                textDate.text = currentItem.date
+                //textDate.text = currentItem.date.toString()
 
                 rvReload.setOnClickListener{
 

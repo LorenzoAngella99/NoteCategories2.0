@@ -17,6 +17,7 @@
             android:layout_width="137dp"
             android:layout_height="57dp"
             android:layout_weight="1"
+
             app:srcCompat="@drawable/baseline_bookmark_24" />
 
         <LinearLayout
@@ -41,11 +42,7 @@
                 android:paddingLeft="10dp"
                 android:text="date" />
 
-            <fragment
-                android:id="@+id/fragmentContainerView"
-                android:name="com.example.notecategories20.Note.CategoryNoteFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+
 
         </LinearLayout>
 

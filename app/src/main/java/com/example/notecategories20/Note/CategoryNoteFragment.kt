@@ -19,5 +19,4 @@ class CategoryNoteFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_category_note, container, false)
     }
 
-
 }

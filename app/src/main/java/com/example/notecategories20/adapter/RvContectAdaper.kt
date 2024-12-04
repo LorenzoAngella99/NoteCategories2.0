@@ -2,13 +2,18 @@ package com.example.notecategories20.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notecategories20.Note.Note
 import com.example.notecategories20.databinding.NoteItemListBinding
+import com.example.notecategories20.homeFragmentDirections
+import java.util.Calendar
 
 class RvContactsAdapter(private  val contactList : java.util.ArrayList<Note>) : RecyclerView.Adapter<RvContactsAdapter.ViewHolder>(){
-    class ViewHolder (val binding : NoteItemListBinding) : RecyclerView.ViewHolder(binding.root){}
 
+
+    class ViewHolder (val binding : NoteItemListBinding) : RecyclerView.ViewHolder(binding.root){}
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -27,14 +32,18 @@ class RvContactsAdapter(private  val contactList : java.util.ArrayList<Note>) : 
         holder.apply{
             binding.apply{
                 textTitle.text = currentItem.title
-                //textDate.text = currentItem.date.toString()
+                textDate.text = currentItem.date
 
                 rvReload.setOnClickListener{
-
-
+                   val action = homeFragmentDirections.actionHomeFragmentToUpdateFragment(
+                       currentItem.title.toString(),
+                       currentItem.content.toString(),
+                       currentItem.id.toString(),
+                       currentItem.date.toString()
+                   )
+                    findNavController(holder.itemView).navigate(action)
                 }
                 rvReload.setOnLongClickListener {
-
 
                     true
                 }

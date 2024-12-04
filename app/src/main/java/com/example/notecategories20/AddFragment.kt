@@ -13,6 +13,8 @@ import com.example.notecategories20.Note.Note
 import com.example.notecategories20.databinding.FragmentAddBinding
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 
 
 class AddFragment : Fragment() {
@@ -45,7 +47,8 @@ class AddFragment : Fragment() {
         val title = textTitle?.text.toString()
         val content = textContent?.text.toString()
 
-        val date = Calendar.getInstance().toString()
+        val date = LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+        Log.d(TAG, "current data $date")
 
         if(title.isNotEmpty() && content.isNotEmpty()){
             val noteId = firebaseRef.push().key!!

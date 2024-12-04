@@ -25,8 +25,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater) //binding
         setContentView(binding.root)
 
-
-
         binding.apply{
             navMenu.bringToFront()
             setSupportActionBar(toolbar)
@@ -40,8 +38,9 @@ class MainActivity : AppCompatActivity() {
 
             mainLayout.addDrawerListener(toggle)
 
-
             //--- mettere i listener dei item menu qui---
+
+
 
             //--- mettere i listener dei item menu qui---
         }

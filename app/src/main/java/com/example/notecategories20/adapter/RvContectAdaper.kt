@@ -28,12 +28,10 @@ class RvContactsAdapter(private  val contactList : java.util.ArrayList<Note>) : 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val currentItem = contactList[position]
-
         holder.apply{
             binding.apply{
                 textTitle.text = currentItem.title
                 textDate.text = currentItem.date
-
                 rvReload.setOnClickListener{
                    val action = homeFragmentDirections.actionHomeFragmentToUpdateFragment(
                        currentItem.title.toString(),
@@ -44,17 +42,9 @@ class RvContactsAdapter(private  val contactList : java.util.ArrayList<Note>) : 
                     findNavController(holder.itemView).navigate(action)
                 }
                 rvReload.setOnLongClickListener {
-
                     true
                 }
             }
-
         }
-
     }
-
-
-
-
-
 }

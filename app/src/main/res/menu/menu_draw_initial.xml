@@ -1,26 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-
     <item
         android:id="@+id/item_categories"
         android:checkable="true"
-        android:title="Categories" />
+        android:title="Menu">
+        <menu>
+            <group>
+                <item
+                    android:id="@+id/tag_item"
+                    android:checkable="true"
+                    android:icon="@drawable/baseline_bookmark_24"
+                    android:title="Tag" />
+                <item
+                    android:icon="@drawable/baseline_edit_note_24"
+                    android:title="categories" />
+            </group>
+        </menu>
+    </item>
     <item android:title="Contact">
         <menu>
             <group>
-                <item android:title="Linkedin"
-                    android:checkable="true"
-                    android:id="@+id/item_linkedin" />
                 <item
-                    android:title="Email"
+                    android:id="@+id/item_linkedin"
                     android:checkable="true"
-                    android:id="@+id/item_email" />
+                    android:icon="@drawable/icons8_linkedin"
+                    android:title="Linkedin" />
+                <item
+                    android:id="@+id/item_email"
+                    android:checkable="true"
+                    android:icon="@drawable/baseline_email_24"
+                    android:title="Email" />
             </group>
         </menu>
-
+     </item>
+    <item android:title="About">
+        <menu>
+            <group>
+                <item
+                    android:id="@+id/item_infoapp"
+                    android:checkable="true"
+                    android:icon="@drawable/baseline_info_outline_24"
+                    android:title="Info" />
+            </group>
+        </menu>
     </item>
-    <item
-        android:id="@+id/item_infoapp"
-        android:checkable="true"
-        android:title="Info" />
 </menu>
+

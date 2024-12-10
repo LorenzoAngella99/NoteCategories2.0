@@ -19,30 +19,22 @@ import com.google.firebase.database.ValueEventListener
 
 
 class homeFragment : Fragment() {
-
-
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-
     private lateinit var noteList : ArrayList<Note>
     private lateinit var firebaseRef : DatabaseReference
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentHomeBinding.inflate(inflater, container,false)
-
         binding.floatingActionButton.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_addFragment)
         }
-
         firebaseRef = FirebaseDatabase.getInstance().getReference("notes")
         noteList = arrayListOf()
-
         fetchData()
-
         binding.recyclerView.apply{
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(this.context)

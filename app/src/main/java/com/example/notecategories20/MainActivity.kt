@@ -13,9 +13,14 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
+import androidx.navigation.ui.setupActionBarWithNavController
+import androidx.navigation.ui.setupWithNavController
 import com.example.notecategories20.Note.CategoryNoteFragment
 import com.example.notecategories20.databinding.ActivityMainBinding
 import com.google.firebase.FirebaseApp
@@ -25,7 +30,11 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var toggle: ActionBarDrawerToggle
 
+    private lateinit var navController : NavController
+
+    private lateinit var appBarConfiguration: AppBarConfiguration
     var transatcion :FragmentTransaction = supportFragmentManager.beginTransaction()
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,48 +54,26 @@ class MainActivity : AppCompatActivity() {
                 R.string.nav_close
             )
             mainLayout.addDrawerListener(toggle)
-            //--- mettere i listener dei item menu qui---
 
+            //--- mettere i listener dei item menu qui---
             navMenu.setNavigationItemSelectedListener {
                
                 when (it.itemId) {
-                    R.id.tag_item -> {
-                        Toast.makeText(this@MainActivity, "Categories", Toast.LENGTH_SHORT).show()
-                        //change to categories fragment
-                        //NavHostFragment.findNavController(fragmentContainerView).navigate(R.id.action_homeFragment_to_categories_home_fragment)
+                    R.id.category -> {
 
-//                        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_menu) as NavHostFragment
-//                        val navController = navHostFragment.navController
-
-                        mainLayout.closeDrawers()
-                    }
-                    R.id.item_infoapp -> {
-                        Toast.makeText(this@MainActivity, "Info", Toast.LENGTH_SHORT).show()
-
-
-                        mainLayout.closeDrawers()
                     }
                     R.id.item_linkedin -> {
                         val uri = Uri.parse("https://www.linkedin.com/in/lorenzo-angella-6281791a2/")
                         val intent = Intent(Intent.ACTION_VIEW, uri)
                         startActivity(intent)
                     }
-                    R.id.item_email -> {
-
-
-
-                    }
                 }
                 true
-
             //--- mettere i listener dei item menu qui---
             }
-
-
         }
+
     }
-
-
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean { //funzione per attivare il toggle
         return if (toggle.onOptionsItemSelected(item)) {

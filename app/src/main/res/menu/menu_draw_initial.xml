@@ -7,12 +7,14 @@
         <menu>
             <group>
                 <item
-                    android:id="@+id/tag_item"
+                    android:id="@+id/tag"
                     android:checkable="true"
                     android:icon="@drawable/baseline_bookmark_24"
                     android:title="Tag" />
                 <item
                     android:icon="@drawable/baseline_edit_note_24"
+                    android:checkable="true"
+                    android:id="@+id/category"
                     android:title="categories" />
             </group>
         </menu>

@@ -6,14 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.notecategories20.databinding.FragmentCategoriesHomeFragmentBinding
+import com.example.notecategories20.databinding.FragmentHomeBinding
 import com.google.firebase.database.DatabaseReference
 
 
 class categories_home_fragment : Fragment() {
-
-    private var _binding: FragmentCategoriesHomeFragmentBinding? = null
-    private val binding get() = _binding!!
-
+//    private var _binding: FragmentHomeBinding? = null
+//    private val binding get() = _binding!!
 
     private lateinit var firebaseRef : DatabaseReference
 
@@ -21,15 +20,10 @@ class categories_home_fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        _binding = FragmentCategoriesHomeFragmentBinding.inflate(inflater, container,false)
-        binding.floatingActionButton2.setOnClickListener {
-            TODO("mettere il nav controller del fragment per creare una nuova categoria")
-        }
-
+        //_binding = FragmentHomeBinding.inflate(inflater, container,false)
 
 
         // Inflate the layout for this fragment
-        return binding.root
+        return inflater.inflate(R.layout.fragment_categories_home_fragment, container, false)
     }
 }

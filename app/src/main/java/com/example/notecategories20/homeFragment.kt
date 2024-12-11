@@ -39,6 +39,8 @@ class homeFragment : Fragment() {
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(this.context)
         }
+
+
         return binding.root
     }
     private fun fetchData() {

@@ -51,8 +51,7 @@
             app:enterAnim="@anim/nav_default_enter_anim" />
         <action
             android:id="@+id/action_homeFragment_to_categories_home_fragment"
-            app:destination="@id/categories_home_fragment"
-            app:enterAnim="@anim/nav_default_enter_anim" />
+            app:destination="@id/categories_home_fragment" />
     </fragment>
     <fragment
         android:id="@+id/categories_home_fragment"

@@ -10,6 +10,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentTransaction
@@ -23,6 +24,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.notecategories20.Note.CategoryNoteFragment
 import com.example.notecategories20.databinding.ActivityMainBinding
+import com.google.android.material.navigation.NavigationView
 import com.google.firebase.FirebaseApp
 import com.google.firebase.database.DatabaseReference
 
@@ -33,9 +35,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController : NavController
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-    var transatcion :FragmentTransaction = supportFragmentManager.beginTransaction()
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,35 +42,20 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater) //binding
         setContentView(binding.root)
 
-        binding.apply {
+
+
+        binding.apply { // per aprire il menu tramite il pulstane
             navMenu.bringToFront()
             setSupportActionBar(toolbar)
-
             toggle = ActionBarDrawerToggle(
                 this@MainActivity,
-                mainLayout,
+                drawerLayout,
                 R.string.nav_open,
                 R.string.nav_close
             )
-            mainLayout.addDrawerListener(toggle)
-
-            //--- mettere i listener dei item menu qui---
-            navMenu.setNavigationItemSelectedListener {
-               
-                when (it.itemId) {
-                    R.id.category -> {
-
-                    }
-                    R.id.item_linkedin -> {
-                        val uri = Uri.parse("https://www.linkedin.com/in/lorenzo-angella-6281791a2/")
-                        val intent = Intent(Intent.ACTION_VIEW, uri)
-                        startActivity(intent)
-                    }
-                }
-                true
-            //--- mettere i listener dei item menu qui---
-            }
         }
+
+
 
     }
 
@@ -81,5 +65,10 @@ class MainActivity : AppCompatActivity() {
         } else {
             return super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val navController = findNavController(R.id.fragment_container_view)
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 }

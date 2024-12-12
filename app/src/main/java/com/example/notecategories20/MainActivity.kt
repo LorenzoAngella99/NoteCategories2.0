@@ -18,6 +18,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -53,6 +54,17 @@ class MainActivity : AppCompatActivity() {
                 R.string.nav_open,
                 R.string.nav_close
             )
+
+
+            navMenu.setNavigationItemSelectedListener {
+                when(it.itemId){
+                    R.id.category-> {
+                        findNavController(R.id.fragment_container_view).navigate(R.id.action_homeFragment_to_categories_home_fragment3)
+                        drawerLayout.closeDrawers()
+                    }
+                }
+                true
+            }
         }
 
 

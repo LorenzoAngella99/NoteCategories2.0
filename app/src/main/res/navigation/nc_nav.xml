@@ -51,5 +51,17 @@
             android:id="@+id/action_homeFragment_to_addFragment2"
             app:destination="@id/addFragment"
             app:enterAnim="@anim/nav_default_enter_anim" />
+        <action
+            android:id="@+id/action_homeFragment_to_categories_home_fragment3"
+            app:destination="@id/categories_home_fragment3" />
+    </fragment>
+    <fragment
+        android:id="@+id/categories_home_fragment3"
+        android:name="com.example.notecategories20.categories_home_fragment"
+        android:label="fragment_categories_home_fragment"
+        tools:layout="@layout/fragment_categories_home_fragment" >
+        <action
+            android:id="@+id/action_categories_home_fragment3_to_homeFragment"
+            app:destination="@id/homeFragment" />
     </fragment>
 </navigation>

@@ -1,33 +1,21 @@
 package com.example.notecategories20
 
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
-import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.FragmentManager
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.notecategories20.Note.CategoryNoteFragment
 import com.example.notecategories20.databinding.ActivityMainBinding
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.FirebaseApp
-import com.google.firebase.database.DatabaseReference
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -44,7 +32,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
-
         binding.apply { // per aprire il menu tramite il pulstane
             navMenu.bringToFront()
             setSupportActionBar(toolbar)
@@ -56,20 +43,31 @@ class MainActivity : AppCompatActivity() {
             )
 
 
-            navMenu.setNavigationItemSelectedListener {
+            val drawerLayout: DrawerLayout = binding.drawerLayout
+            val navView: NavigationView = binding.navMenu
+            val navController = findNavController(R.id.fragment_container_view)
+
+            navView.setNavigationItemSelectedListener {
                 when(it.itemId){
-                    R.id.category-> {
-                        findNavController(R.id.fragment_container_view).navigate(R.id.action_homeFragment_to_categories_home_fragment3)
-                        drawerLayout.closeDrawers()
+                    R.id.categories_home_fragment ->{
+                        if(navController.currentDestination?.id != R.id.categories_home_fragment){
+                            navController.navigate(R.id.categories_home_fragment)
+                        }
                     }
                 }
                 true
             }
         }
+    }
 
-
+    private fun replicateFragment(fragment: Fragment){
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.fragment_container_view, fragment)
+        fragmentTransaction.commit()
 
     }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean { //funzione per attivare il toggle
         return if (toggle.onOptionsItemSelected(item)) {

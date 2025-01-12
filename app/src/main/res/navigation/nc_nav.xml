@@ -53,15 +53,27 @@
             app:enterAnim="@anim/nav_default_enter_anim" />
         <action
             android:id="@+id/action_homeFragment_to_categories_home_fragment3"
-            app:destination="@id/categories_home_fragment3" />
+            app:destination="@id/categories_home_fragment" />
     </fragment>
     <fragment
-        android:id="@+id/categories_home_fragment3"
+        android:id="@+id/categories_home_fragment"
         android:name="com.example.notecategories20.categories_home_fragment"
-        android:label="fragment_categories_home_fragment"
-        tools:layout="@layout/fragment_categories_home_fragment" >
+        android:label="Category"
+        tools:layout="@layout/fragment_categories_home_fragment">
         <action
             android:id="@+id/action_categories_home_fragment3_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_categories_home_fragment3_to_updateCategoryFragment"
+            app:destination="@id/updateCategoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateCategoryFragment"
+        android:name="com.example.notecategories20.UpdateCategoryFragment"
+        android:label="fragment_update_category"
+        tools:layout="@layout/fragment_update_category" >
+        <action
+            android:id="@+id/action_updateCategoryFragment_to_categories_home_fragment3"
+            app:destination="@id/categories_home_fragment" />
     </fragment>
 </navigation>

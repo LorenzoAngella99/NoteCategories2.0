@@ -54,6 +54,10 @@ dependencies {
 
     implementation("com.google.android.material:material:1.9.0")
 
+    //----------
+    implementation(platform("androidx.compose:compose-bom:2024.10.01"))
+
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)

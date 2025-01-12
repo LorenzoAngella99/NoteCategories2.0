@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.notecategories20.Note.Tag.TagCategory
+import com.example.notecategories20.categories_home_fragment
 import com.example.notecategories20.databinding.CategoryItemListBinding
 
 
@@ -29,8 +30,9 @@ class RvTagAdaper(private  val TagList : java.util.ArrayList<TagCategory>) : Rec
             binding.apply{
                 textNameCategory.text = currentItem.name
 
-                horiRecycleViewTag.setOnLongClickListener {
-                    true
+                horiRecycleViewTag.setOnClickListener {
+
+
                 }
             }
         }

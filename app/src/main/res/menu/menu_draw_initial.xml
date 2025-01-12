@@ -14,7 +14,7 @@
                 <item
                     android:icon="@drawable/baseline_edit_note_24"
                     android:checkable="true"
-                    android:id="@+id/category"
+                    android:id="@+id/categories_home_fragment"
                     android:title="categories" />
             </group>
         </menu>

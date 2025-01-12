@@ -32,15 +32,15 @@ class homeFragment : Fragment() {
         binding.floatingActionButton.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_addFragment)
         }
+
         firebaseRef = FirebaseDatabase.getInstance().getReference("notes")
         noteList = arrayListOf()
         fetchData()
+
         binding.recyclerView.apply{
             setHasFixedSize(true)
             layoutManager = LinearLayoutManager(this.context)
         }
-
-
         return binding.root
     }
     private fun fetchData() {

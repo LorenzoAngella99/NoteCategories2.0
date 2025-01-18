@@ -1,6 +1,7 @@
 package com.example.notecategories20
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -26,6 +27,8 @@ import org.checkerframework.common.subtyping.qual.Bottom
 
 class categories_home_fragment : Fragment() {
 
+
+    private val TAG = "CategoriesHomeFragment"
     private var _binding: FragmentCategoriesHomeFragmentBinding? = null
 
     //private var _binding: FragmentHomeBinding? = null
@@ -47,13 +50,14 @@ class categories_home_fragment : Fragment() {
 
             val btnCreateCategory = view.findViewById<Button>(R.id.BtnCreateCategory)
             val editTextCategory = view.findViewById<EditText>(R.id.BSD_editText)
-            btnCreateCategory.setOnClickListener {
+            btnCreateCategory.setOnClickListener { // save data category
 
                 val idCategory = firebaseRef.push().key!!
                 val new_category = CategoryClass(idCategory,editTextCategory.text.toString())
 
                 firebaseRef = FirebaseDatabase.getInstance().getReference("category")
-                firebaseRef.child("category").setValue(new_category)
+                firebaseRef.child(idCategory).setValue(new_category)
+
                 Toast.makeText(requireContext(), "create category", Toast.LENGTH_SHORT).show()
                 bottomSheetDialog.dismiss()
             }
@@ -90,5 +94,26 @@ class categories_home_fragment : Fragment() {
             }
 
         })
+    }
+
+    private fun saveDataCategory(){
+        firebaseRef = FirebaseDatabase.getInstance().getReference("category")
+        val textCategory = view?.findViewById<EditText>(R.id.editTextTitle)
+        val categoryName = textCategory?.text.toString()
+
+        val idCategory = firebaseRef.push().key!!
+        val new_category = CategoryClass(idCategory,categoryName)
+
+        if(categoryName.isNotEmpty()){
+            firebaseRef.child(idCategory).setValue(new_category)
+                .addOnCompleteListener {
+                    Log.d(TAG,"Category Added")
+                }.addOnFailureListener{
+                    Log.d(TAG,"Error ${it.message}")
+                }
+        }else{
+            Toast.makeText(requireContext(),"Category name is empty", Toast.LENGTH_SHORT).show()
+        }
+
     }
 }

@@ -16,6 +16,11 @@
                     android:checkable="true"
                     android:id="@+id/categories_home_fragment"
                     android:title="categories" />
+                <item
+                    android:id="@+id/home"
+                    android:checkable="true"
+                    android:icon="@drawable/baseline_home_24"
+                    android:title="Home" />
             </group>
         </menu>
     </item>

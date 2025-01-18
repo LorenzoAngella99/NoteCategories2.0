@@ -40,7 +40,6 @@ class AddFragment : Fragment() {
 
 
     private fun saveData(){
-
         val textTitle = view?.findViewById<EditText>(R.id.editTextTitle)
         val textContent = view?.findViewById<EditText>(R.id.editTextTextMultiLine)
 
@@ -62,8 +61,6 @@ class AddFragment : Fragment() {
                     //Toast.makeText(requireContext(),"Error ${it.message}", Toast.LENGTH_SHORT).show()
                     Log.d(TAG,"Error ${it.message}")
                 }
-
         }
-
     }
 }

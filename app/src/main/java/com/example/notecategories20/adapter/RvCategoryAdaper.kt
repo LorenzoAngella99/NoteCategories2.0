@@ -32,7 +32,6 @@ class RvCategoryAdaper(private val CategoryList: ArrayList<CategoryClass>) : Rec
         holder.apply{
             binding.apply{
                 textNameCategory.text = currentItem.name
-
                 blockCategoryListItem.setOnLongClickListener {
                     true
                 }

@@ -44,13 +44,6 @@ class RvContactsAdapter(private  val contactList : java.util.ArrayList<Note>) : 
                    )
                     findNavController(holder.itemView).navigate(action)
                 }
-                rvReload.setOnLongClickListener {
-                    TODO("inserire la cancellazione singola dei elementi della lista")
-
-
-
-                    true
-                }
 
             }
         }

@@ -139,7 +139,7 @@ class homeFragment : Fragment() {
         val mBackground = ColorDrawable()
         val backgroundColor = Color.parseColor("#b80f0a")
         val deleteDrawable =
-            checkNotNull(ContextCompat.getDrawable(this.requireContext(), R.drawable.baseline_info_outline_24))
+            checkNotNull(ContextCompat.getDrawable(this.requireContext(), R.drawable.baseline_delete_24))
         val intrinsicWidth = deleteDrawable.intrinsicWidth
         val intrinsicHeight = deleteDrawable.intrinsicHeight
 

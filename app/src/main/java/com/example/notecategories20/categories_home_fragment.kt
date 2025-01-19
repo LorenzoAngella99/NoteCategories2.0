@@ -1,5 +1,11 @@
 package com.example.notecategories20
 
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffXfermode
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,7 +15,10 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.notecategories20.Note.CategoryClass
 import com.example.notecategories20.adapter.RvCategoryAdaper
 import com.example.notecategories20.databinding.FragmentCategoriesHomeFragmentBinding
@@ -17,6 +26,7 @@ import com.example.notecategories20.databinding.FragmentHomeBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -34,6 +44,7 @@ class categories_home_fragment : Fragment() {
     //private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var rvAdapter : RvCategoryAdaper
     private lateinit var categoryList : ArrayList<CategoryClass>
     private lateinit var firebaseRef : DatabaseReference
 
@@ -41,9 +52,7 @@ class categories_home_fragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        //_binding = FragmentHomeBinding.inflate(inflater, container, false)
         _binding = FragmentCategoriesHomeFragmentBinding.inflate(inflater, container, false)
-
         binding.floatingActionButton2.setOnClickListener { //bottom sheet dialog
             val bottomSheetDialog = BottomSheetDialog(requireContext())
             val view = layoutInflater.inflate(R.layout.fragemnt_category_bottomsheet, null)
@@ -73,6 +82,7 @@ class categories_home_fragment : Fragment() {
             setHasFixedSize(true) //serve per ottimizzare la performance
             layoutManager = LinearLayoutManager(this.context)
         }
+        setSwipeToDelete()
         return binding.root
     }
 
@@ -86,7 +96,7 @@ class categories_home_fragment : Fragment() {
                         categoryList.add(categoryData!!)
                     }
                 }
-                val rvAdapter = RvCategoryAdaper(categoryList)
+                rvAdapter = RvCategoryAdaper(categoryList)
                 binding.recyclerViewCa.adapter = rvAdapter
             }
             override fun onCancelled(error: DatabaseError) {
@@ -114,6 +124,105 @@ class categories_home_fragment : Fragment() {
         }else{
             Toast.makeText(requireContext(),"Category name is empty", Toast.LENGTH_SHORT).show()
         }
-
     }
+    private fun setSwipeToDelete() {
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val modelClass = categoryList[viewHolder.adapterPosition]
+
+                val position = viewHolder.adapterPosition
+
+                categoryList.removeAt(viewHolder.adapterPosition)
+
+                rvAdapter!!.notifyItemRemoved(viewHolder.adapterPosition)
+
+                firebaseRef.child(modelClass.idCategory.toString()).removeValue() // Rimozione categoria
+
+            }
+
+            override fun getSwipeThreshold(viewHolder: RecyclerView.ViewHolder): Float {
+                return 1f
+            }
+
+            override fun onChildDraw(
+                c: Canvas, recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                dX: Float, dY: Float, actionState: Int, isCurrentlyActive: Boolean
+            ) {
+                setDeleteIcon(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                super.onChildDraw(
+                    c,
+                    recyclerView,
+                    viewHolder,
+                    dX,
+                    dY,
+                    actionState,
+                    isCurrentlyActive
+                )
+            }
+        }).attachToRecyclerView(binding.recyclerViewCa)
+    }
+
+    private fun setDeleteIcon(
+        c: Canvas,
+        recyclerView: RecyclerView,
+        viewHolder: RecyclerView.ViewHolder,
+        dX: Float,
+        dY: Float,
+        actionState: Int,
+        isCurrentlyActive: Boolean
+    ) {
+        val mClearPaint = Paint()
+        mClearPaint.setXfermode(PorterDuffXfermode(PorterDuff.Mode.CLEAR))
+        val mBackground = ColorDrawable()
+        val backgroundColor = Color.parseColor("#b80f0a")
+        val deleteDrawable =
+            checkNotNull(ContextCompat.getDrawable( this.requireContext(), R.drawable.baseline_delete_24))
+        val intrinsicWidth = deleteDrawable.intrinsicWidth
+        val intrinsicHeight = deleteDrawable.intrinsicHeight
+
+        val itemView = viewHolder.itemView
+        val itemHeight = itemView.height
+
+        val isCancelled = dX == 0f && !isCurrentlyActive
+
+        if (isCancelled) {
+            c.drawRect(
+                itemView.right + dX, itemView.top.toFloat(),
+                itemView.right.toFloat(), itemView.bottom.toFloat(), mClearPaint
+            )
+            return
+        }
+
+        mBackground.color = backgroundColor
+        mBackground.setBounds(
+            itemView.right + dX.toInt(),
+            itemView.top,
+            itemView.right,
+            itemView.bottom
+        )
+        mBackground.draw(c)
+
+        val deleteIconTop = itemView.top + (itemHeight - intrinsicHeight) / 2
+        val deleteIconMargin = (itemHeight - intrinsicHeight) / 2
+        val deleteIconLeft = itemView.right - deleteIconMargin - intrinsicWidth
+        val deleteIconRight = itemView.right - deleteIconMargin
+        val deleteIconBottom = deleteIconTop + intrinsicHeight
+
+
+        deleteDrawable.setBounds(deleteIconLeft, deleteIconTop, deleteIconRight, deleteIconBottom)
+        deleteDrawable.draw(c)
+    }
+
+
+
+
 }

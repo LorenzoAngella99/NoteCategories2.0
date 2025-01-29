@@ -50,10 +50,10 @@ dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation(libs.firebase.database.ktx)
-    //----------
-
+    //-coroutine-
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+    //-material-
     implementation("com.google.android.material:material:1.9.0")
-
     //----------
     implementation(platform("androidx.compose:compose-bom:2024.10.01"))
 

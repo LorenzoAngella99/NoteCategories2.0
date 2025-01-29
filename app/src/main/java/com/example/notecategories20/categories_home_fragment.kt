@@ -16,6 +16,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +27,7 @@ import com.example.notecategories20.databinding.FragmentHomeBinding
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -72,6 +74,9 @@ class categories_home_fragment : Fragment() {
             }
             bottomSheetDialog.setContentView(view)
             bottomSheetDialog.show()
+        }
+        binding.recyclerViewCa.setOnClickListener {
+            findNavController().navigate(R.id.action_categories_home_fragment3_to_updateCategoryFragment)
         }
 
         firebaseRef = FirebaseDatabase.getInstance().getReference("category")

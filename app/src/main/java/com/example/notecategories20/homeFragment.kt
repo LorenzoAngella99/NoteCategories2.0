@@ -175,10 +175,4 @@ class homeFragment : Fragment() {
         deleteDrawable.setBounds(deleteIconLeft, deleteIconTop, deleteIconRight, deleteIconBottom)
         deleteDrawable.draw(c)
     }
-
-
-
-
-
-
 }

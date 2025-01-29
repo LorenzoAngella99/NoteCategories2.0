@@ -65,6 +65,12 @@ class MainActivity : AppCompatActivity() {
                             Intent(Intent.ACTION_VIEW, Uri.parse("https://www.linkedin.com/in/lorenzo-angella-6281791a2/"))
                         startActivity(browserIntent)
                     }
+                    R.id.item_infoapp->{
+                        if(navController.currentDestination?.id != R.id.infoApp){
+                            navController.navigate(R.id.infoApp)
+                        }
+                        drawerLayout.closeDrawers()
+                    }
                 }
                 true
             }

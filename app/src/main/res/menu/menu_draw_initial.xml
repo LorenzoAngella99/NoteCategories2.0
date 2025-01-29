@@ -7,20 +7,15 @@
         <menu>
             <group>
                 <item
-                    android:id="@+id/tag"
-                    android:checkable="true"
-                    android:icon="@drawable/baseline_bookmark_24"
-                    android:title="Tag" />
-                <item
-                    android:icon="@drawable/baseline_edit_note_24"
-                    android:checkable="true"
-                    android:id="@+id/categories_home_fragment"
-                    android:title="categories" />
-                <item
                     android:id="@+id/home"
                     android:checkable="true"
                     android:icon="@drawable/baseline_home_24"
                     android:title="Home" />
+                <item
+                    android:id="@+id/categories_home_fragment"
+                    android:checkable="true"
+                    android:icon="@drawable/baseline_edit_note_24"
+                    android:title="categories" />
             </group>
         </menu>
     </item>
